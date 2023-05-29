@@ -7,12 +7,15 @@
             class="flex w-full flex-col items-center justify-center gap-8"
             @submit.prevent="searchPokemon(searchInput)"
         >
-            <input
-                v-model="searchInput"
-                class="h-12 w-full rounded-lg p-4 shadow focus:shadow-lg focus:shadow-blue-300 focus:outline-none"
-                type="text"
-                placeholder="Search for a Pokemon"
-            />
+            <div class="flex w-full flex-col">
+                <input
+                    v-model="searchInput"
+                    class="h-12 w-full rounded-lg p-4 shadow focus:shadow-lg focus:shadow-blue-300 focus:outline-none"
+                    type="text"
+                    placeholder="Search for a Pokemon"
+                />
+                <span v-if="pokemonNameError" class="text-xs text-red-600">Invalid Pokemon Name</span>
+            </div>
             <button
                 type="submit"
                 class="text-md w-2/4 rounded-md bg-blue-400 p-3 font-bold text-white shadow hover:scale-105 hover:shadow-lg"
@@ -31,16 +34,18 @@ const emit = defineEmits(['updateData'])
 const searchInput = ref('')
 const pokemonData = ref({})
 const defaultPokemon = ref('Pikachu')
+const pokemonNameError = ref(false)
 
 async function searchPokemon(pokemonName) {
     try {
         const lowerCaseName = pokemonName.toLowerCase()
         const reponse = await axios.get(`https://pokeapi.co/api/v2/pokemon/${lowerCaseName}`)
         pokemonData.value = reponse.data
-        console.log('searchPokemon', pokemonData.value.name)
         emit('updateData', pokemonData.value)
+        pokemonNameError.value = false
     } catch (error) {
         console.log(error)
+        pokemonNameError.value = true
     }
 }
 
