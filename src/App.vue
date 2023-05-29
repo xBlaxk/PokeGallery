@@ -1,19 +1,25 @@
-<script setup>
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
-import HelloWorld from "./components/HelloWorld.vue";
-</script>
-
 <template>
-  <div class="text-center selection:bg-green-100">
-    <img class="mx-auto mt-12 mb-8" alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Vite + Vue 3 + Tailwindcss v3" />
-    <img
-      class="mx-auto my-8"
-      alt="powered-by"
-      src="./assets/powered-by-vitawind-bright.png"
-    />
-  </div>
+    <div class="flex min-h-screen flex-col text-center selection:bg-green-100">
+        <NavBar></NavBar>
+        <div class="my-8 grow">
+            <SearchBox />
+            <PokeData :pokemonData="pokemonData" @updateData="count++"></PokeData>
+        </div>
+        <Footer class="mt-auto"></Footer>
+    </div>
 </template>
+<script setup>
+import SearchBox from '@/components/SearchBox.vue'
+import NavBar from '@/components/NavBar.vue'
+import PokeData from '@/components/PokeData.vue'
+import Footer from '@/components/Footer.vue'
+import { ref } from 'vue'
 
+const pokemonData = ref({})
+const count = ref(0)
+const updateData = (data) => {
+    console.log('data')
+}
+
+</script>
 <style></style>
