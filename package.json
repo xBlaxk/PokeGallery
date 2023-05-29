@@ -15,6 +15,7 @@
     "@vitejs/plugin-vue": "^2.0.0",
     "prettier": "^2.5.1",
     "prettier-plugin-tailwindcss": "^0.1.5",
+    "sass": "^1.62.1",
     "vitawind": "^2.0.0",
     "vite": "^2.7.2"
   }
