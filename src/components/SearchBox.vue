@@ -26,24 +26,25 @@
 import { onMounted, ref } from 'vue'
 import axios from 'axios'
 
-defineProps({
-    msg: String,
-})
 const emit = defineEmits(['updateData'])
 
-const searchInput = ref('pikachu')
+const searchInput = ref('')
 const pokemonData = ref({})
-const defaultPokemon = ref('pikachu')
+const defaultPokemon = ref('Pikachu')
 
 async function searchPokemon(pokemonName) {
-    const reponse = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
-    pokemonData.value = reponse.data
-    emit('updateData')
-    // emit('updateData', pokemonData.value)
+    try {
+        const lowerCaseName = pokemonName.toLowerCase()
+        const reponse = await axios.get(`https://pokeapi.co/api/v2/pokemon/${lowerCaseName}`)
+        pokemonData.value = reponse.data
+        console.log('searchPokemon', pokemonData.value.name)
+        emit('updateData', pokemonData.value)
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 onMounted(async () => {
     searchPokemon(defaultPokemon.value)
 })
 </script>
-<style scoped></style>
