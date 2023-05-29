@@ -8,13 +8,8 @@
             @submit.prevent="searchPokemon(searchInput)"
         >
             <div class="flex w-full flex-col">
-                <input
-                    v-model="searchInput"
-                    class="h-12 w-full rounded-lg p-4 shadow focus:shadow-lg focus:shadow-blue-300 focus:outline-none"
-                    type="text"
-                    placeholder="Search for a Pokemon"
-                />
                 <span v-if="pokemonNameError" class="text-xs text-red-600">Invalid Pokemon Name</span>
+                <search-dropdown :options="pokemonList" :placeholder="'Search for a Pokemon'" @selected="selectOption"></search-dropdown>
             </div>
             <button
                 type="submit"
@@ -28,13 +23,20 @@
 <script setup>
 import { onMounted, ref } from 'vue'
 import axios from 'axios'
+import SearchDropdown from './SearchDropdown.vue'
 
 const emit = defineEmits(['updateData'])
 
 const searchInput = ref('')
 const pokemonData = ref({})
-const defaultPokemon = ref('Pikachu')
+const defaultPokemon = ref('pikachu')
 const pokemonNameError = ref(false)
+
+const pokemonList = ref([])
+
+function selectOption(option)  {
+    searchInput.value = option.name
+}
 
 async function searchPokemon(pokemonName) {
     try {
@@ -49,7 +51,16 @@ async function searchPokemon(pokemonName) {
     }
 }
 
+async function getPokemonsList() {
+    const { data } = await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=2000`)
+    const finalPokemonList = data.results.map((obj, index) => {
+        return { ...obj, id: index+1 }
+    });
+    return finalPokemonList
+}
+
 onMounted(async () => {
+    pokemonList.value = await getPokemonsList()
     searchPokemon(defaultPokemon.value)
 })
 </script>
