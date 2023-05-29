@@ -1,23 +1,23 @@
 <template>
     <div class="mx-auto my-4 flex w-11/12 flex-wrap items-center justify-center rounded-md bg-slate-100 shadow">
-        <h1 class="w-full p-3 text-2xl font-bold uppercase">{{ pikachu?.name }}</h1>
+        <h1 class="w-full p-3 text-2xl font-bold uppercase">{{ pokemonData?.name }}</h1>
         <div class="flex flex-wrap gap-4 p-4">
             <div class="flex w-full flex-wrap items-center justify-center gap-4 rounded-md p-8 shadow-md">
-                <poke-gallery :title="'Original'" :images="pikachu.sprites"></poke-gallery>
+                <poke-gallery :title="'Original'" :images="pokemonData?.sprites"></poke-gallery>
             </div>
             <div class="flex w-full flex-wrap items-center justify-center gap-4 rounded-md p-8 shadow-md">
                 <h2 class="w-full text-left text-xl font-bold uppercase">Other</h2>
-                <div v-for="(otherVersions, otherVersionsKey) in pikachu.sprites.other" :key="otherVersionsKey">
+                <div v-for="(otherVersions, otherVersionsKey) in pokemonData.sprites?.other" :key="otherVersionsKey">
                     <poke-gallery
                         :title="splitAndJoinText(otherVersionsKey)"
-                        :images="pikachu.sprites.other[otherVersionsKey]"
+                        :images="pokemonData.sprites.other[otherVersionsKey]"
                     ></poke-gallery>
                 </div>
             </div>
             <div class="flex w-full flex-wrap items-center justify-center gap-4 rounded-md p-8 shadow-md">
                 <h2 class="w-full text-left text-xl font-bold uppercase">Generations</h2>
                 <div
-                    v-for="(generationGame, generationKey) in pikachu.sprites.versions"
+                    v-for="(generationGame, generationKey) in pokemonData.sprites?.versions"
                     :key="generationKey"
                     class="flex flex-wrap gap-4"
                 >
@@ -38,12 +38,11 @@
 </template>
 
 <script setup>
-import pikachu from '@/assets/pikachu.json'
 import pokeGallery from '@/components/pokeGallery.vue'
 const props = defineProps({
     pokemonData: {
         type: Object,
-        default: { name: 'pikachu' },
+        default: { name: 'pokemonData' },
     },
 })
 
