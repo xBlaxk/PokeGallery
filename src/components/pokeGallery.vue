@@ -12,3 +12,17 @@
     </div>
 </template>
 
+<script setup>
+defineProps({
+    title: {
+        type: String,
+        default: 'Original',
+    },
+    images: {
+        type: Object,
+        required: true,
+    },
+})
+
+</script>
+
