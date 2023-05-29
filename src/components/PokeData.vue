@@ -7,7 +7,11 @@
             </div>
             <div class="flex w-full flex-wrap items-center justify-center gap-4 rounded-md p-8 shadow-md">
                 <h2 class="w-full text-left text-xl font-bold uppercase">Other</h2>
-                <div v-for="(otherVersions, otherVersionsKey) in pokemonData.sprites?.other" :key="otherVersionsKey">
+                <div
+                    v-for="(otherVersions, otherVersionsKey) in pokemonData.sprites?.other"
+                    :key="otherVersionsKey"
+                    class="flex w-full flex-wrap"
+                >
                     <poke-gallery
                         :title="splitAndJoinText(otherVersionsKey)"
                         :images="pokemonData.sprites.other[otherVersionsKey]"
@@ -19,9 +23,9 @@
                 <div
                     v-for="(generationGame, generationKey) in pokemonData.sprites?.versions"
                     :key="generationKey"
-                    class="flex flex-wrap gap-4"
+                    class="flex w-full flex-wrap gap-4"
                 >
-                    <div class="flex flex-wrap gap-4 rounded-md p-4 shadow-md">
+                    <div v-if="true" class="flex w-full flex-wrap gap-4 rounded-md p-4 shadow-md">
                         <h3 class="w-full text-xl font-bold uppercase">{{ splitAndJoinText(generationKey) }}</h3>
                         <div
                             v-for="(game, gameKey) in generationGame"
