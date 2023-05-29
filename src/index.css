@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  transition: 100ms;
+  /* outline: 1px dotted salmon; */
+}
+
+body {
+  @apply bg-slate-200
+}
