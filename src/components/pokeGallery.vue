@@ -24,5 +24,9 @@ defineProps({
     },
 })
 
+const splitAndJoinText = (text) => {
+    const textSplitRegEx = /[_-]/
+    return text.split(textSplitRegEx).join(' ')
+}
 </script>
 
