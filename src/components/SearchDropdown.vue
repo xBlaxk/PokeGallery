@@ -15,7 +15,7 @@
         <!-- Dropdown Menu -->
         <div class="flex flex-col w-full bg-white rounded-md shadow-md" v-show="optionsShown">
             <div
-                class="p-4 hover:bg-blue-100 hover:cursor-pointer"
+                class=" text-md p-4 hover:bg-blue-100 hover:cursor-pointer"
                 @mousedown="selectOption(option)"
                 v-for="(option, index) in filteredOptions"
                 :key="index"
