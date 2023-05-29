@@ -1,5 +1,5 @@
 <template>
-    <div class="dropdown" v-if="options">
+    <div class="dropdown w-full" v-if="options">
         <!-- Dropdown Input -->
         <input
             class="h-12 w-full rounded-lg p-4 shadow focus:shadow-lg focus:outline-none"
@@ -13,9 +13,9 @@
         />
 
         <!-- Dropdown Menu -->
-        <div class="flex flex-col w-full bg-white rounded-md shadow-md" v-show="optionsShown">
+        <div class="flex w-full flex-col rounded-md bg-white shadow-md" v-show="optionsShown">
             <div
-                class=" text-md p-4 hover:bg-blue-100 hover:cursor-pointer"
+                class="text-md p-4 hover:cursor-pointer hover:bg-blue-100"
                 @mousedown="selectOption(option)"
                 v-for="(option, index) in filteredOptions"
                 :key="index"
@@ -30,37 +30,37 @@
 import { computed, onMounted, ref, watch } from 'vue'
 
 const props = defineProps({
-  name: {
-    type: String,
-    required: false,
-    default: 'dropdown',
-    note: 'Input name',
-  },
-  options: {
-    type: Array,
-    required: true,
-    default: [],
-    note: 'Options of dropdown. An array of options with id and name',
-  },
-  placeholder: {
-    type: String,
-    required: false,
-    default: 'Please select an option',
-    note: 'Placeholder of dropdown',
-  },
-  disabled: {
-    type: Boolean,
-    required: false,
-    default: false,
-    note: 'Disable the dropdown',
-  },
-  maxItem: {
-    type: Number,
-    required: false,
-    default: 6,
-    note: 'Max items showing',
-  },
-});
+    name: {
+        type: String,
+        required: false,
+        default: 'dropdown',
+        note: 'Input name',
+    },
+    options: {
+        type: Array,
+        required: true,
+        default: [],
+        note: 'Options of dropdown. An array of options with id and name',
+    },
+    placeholder: {
+        type: String,
+        required: false,
+        default: 'Please select an option',
+        note: 'Placeholder of dropdown',
+    },
+    disabled: {
+        type: Boolean,
+        required: false,
+        default: false,
+        note: 'Disable the dropdown',
+    },
+    maxItem: {
+        type: Number,
+        required: false,
+        default: 6,
+        note: 'Max items showing',
+    },
+})
 
 const emits = defineEmits(['selected', 'filter'])
 const selected = ref('')
